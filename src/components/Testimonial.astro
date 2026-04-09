@@ -1,0 +1,119 @@
+---
+interface Testimonial {
+  profileImage: string;
+  name: string;
+  role: string;
+  testimonial: string;
+  rating: number;
+}
+
+interface Props {
+  title: string;
+  testimonials: Testimonial[];
+}
+
+const { title, testimonials } = Astro.props as Props;
+---
+
+<section class="testimonial-section">
+  <h2 class="section-title">{title}</h2>
+  <div class="testimonials-grid">
+    {
+      testimonials.map((testimonial: Testimonial, index: number) => (
+        <div class="testimonial-card">
+          <img
+            src={testimonial.profileImage}
+            alt={`${testimonial.name}'s profile`}
+            class="profile-image"
+          />
+          <div class="testimonial-content">
+            <h3 class="name">{testimonial.name}</h3>
+            <p class="role">{testimonial.role}</p>
+            <p class="testimonial-text">"{testimonial.testimonial}"</p>
+            <div class="rating">
+              {Array.from({ length: 5 }, (_, i: number) => (
+                <span class={i < testimonial.rating ? "star filled" : "star"}>
+                  ★
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .testimonial-section {
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .testimonial-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+
+  .profile-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+  }
+
+  .testimonial-content {
+    text-align: center;
+  }
+
+  .name {
+    font-size: 1.25rem;
+    margin: 0 0 0.25rem 0;
+  }
+
+  .role {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0 0 1rem 0;
+  }
+
+  .testimonial-text {
+    font-style: italic;
+    margin: 0 0 1rem 0;
+    line-height: 1.5;
+  }
+
+  .rating {
+    display: flex;
+    gap: 0.25rem;
+    justify-content: center;
+  }
+
+  .star {
+    color: #ddd;
+    font-size: 1.2rem;
+  }
+
+  .star.filled {
+    color: #ffd700;
+  }
+</style>

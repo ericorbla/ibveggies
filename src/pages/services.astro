@@ -1,0 +1,63 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Features from "../components/Features.astro";
+import Slideshow from "../components/Slideshow.astro";
+import Testimonial from "../components/Testimonial.astro";
+---
+
+<Layout>
+  <Slideshow autoPlayInterval={3000} />
+
+  <section class="page-content">
+    <div class="container">
+      <h2>Our Services</h2>
+      <p>
+        We specialize in delivering premium spring onions and lettuce with
+        unmatched quality and reliability. Our commitment to excellence ensures
+        that you receive the freshest produce, sourced directly from our farms
+        to your doorstep. Whether you're a restaurant, vendor, or individual
+        customer, we provide a seamless supply of high-quality vegetables to
+        meet your needs.
+      </p>
+    </div>
+  </section>
+  <Features />
+  <Testimonial
+    title="What Our Customers Say"
+    testimonials={[
+      {
+        profileImage: "../images/amamensah.jpeg",
+        name: "Ama Mensah",
+        role: "Restaurant Owner, Accra",
+        testimonial:
+          "The freshness of their spring onions and lettuces is unmatched. My customers notice the difference every time!",
+        rating: 5,
+      },
+      {
+        profileImage: "../images/kwameasare.jpeg",
+        name: "Kwame Asare",
+        role: "Food Vendor, Anloga",
+        testimonial:
+          "Reliable delivery and top-quality produce. I never have to worry about stock because they always come through.",
+        rating: 4,
+      },
+      {
+        profileImage: "../images/efuaboateng.jpeg",
+        name: "Efua Boateng",
+        role: "Catering Service Owner",
+        testimonial:
+          "From farm to table indeed! Their vegetables are always fresh, clean, and perfect for my catering business.",
+        rating: 5,
+      },
+    ]}
+  />
+</Layout>
+<style>
+  p {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    color: #555;
+    text-align: justify;
+    padding: 0 1rem;
+  }
+</style>

@@ -1,0 +1,157 @@
+---
+import Image from "../images/iblogo.png";
+---
+
+<header class="header">
+  <div class="container">
+    <div class="logo">
+      <a href="/">
+        <img src={Image.src} alt="IB Veggies logo" />
+        <span>VEGGIES</span>
+      </a>
+    </div>
+    <button
+      id="menu-toggle"
+      class="menu-toggle"
+      type="button"
+      aria-controls="nav-menu"
+      aria-expanded="false"
+      aria-label="Open navigation menu">☰</button
+    >
+    <nav id="nav-menu" aria-label="Primary" aria-hidden="true">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/services">Services</a></li>
+        <!-- <li><a href="/shop">Shop</a></li> -->
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.getElementById("menu-toggle");
+    const menu = document.getElementById("nav-menu");
+    const header = document.querySelector(".header");
+
+    if (!toggle || !menu || !header) return;
+
+    // Toggle menu
+    toggle.addEventListener("click", function () {
+      const isOpen = menu.classList.toggle("active");
+      menu.setAttribute("aria-hidden", String(!isOpen));
+      toggle.setAttribute("aria-expanded", String(isOpen));
+      toggle.setAttribute(
+        "aria-label",
+        isOpen ? "Close navigation menu" : "Open navigation menu",
+      );
+    });
+
+    // 👇 Scroll effect
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 20) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+    });
+  });
+</script>
+
+<style>
+  .header {
+    height: 70px;
+    background: var(--color-primary);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .header .container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+
+  /* Smooth transition */
+  .header {
+    transition:
+      background 0.3s ease,
+      backdrop-filter 0.3s ease;
+  }
+
+  /* When scrolled */
+  .header.scrolled {
+    background: #062f1c; /* semi-transparent */
+    backdrop-filter: blur(8px); /* nice glass effect */
+    opacity: 0.9;
+  }
+
+  .header img {
+    height: 50px;
+    vertical-align: middle;
+  }
+
+  .header nav ul {
+    display: flex;
+  }
+
+  .header nav ul li {
+    padding: 0 10px;
+  }
+
+  .header nav ul li a {
+    color: #eafbe9;
+  }
+  .header .logo span {
+    color: #eafbe9;
+    font-size: 1.25rem;
+    vertical-align: middle;
+    font-weight: 500;
+  }
+  .menu-toggle {
+    display: none;
+    font-size: 28px;
+    background: none;
+    border: none;
+    color: #eafbe9;
+    cursor: pointer;
+  }
+
+  /* MEDIA QUERY */
+  @media (max-width: 768px) {
+    .menu-toggle {
+      display: block;
+    }
+
+    .header .container {
+      flex-wrap: wrap;
+    }
+
+    /* Hide menu by default */
+    #nav-menu {
+      width: 100%;
+      display: none;
+    }
+
+    /* Show when active */
+    #nav-menu.active {
+      display: block;
+    }
+
+    .header nav ul {
+      flex-direction: column;
+      background: var(--color-primary);
+      margin-top: 10px;
+    }
+
+    .header nav ul li {
+      padding: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  }
+</style>

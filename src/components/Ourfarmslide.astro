@@ -1,0 +1,245 @@
+---
+import { Image } from "astro:assets";
+import Img1 from "../assets/background.jpeg";
+import Img2 from "../assets/lettuce.jpeg";
+import Img4 from "../assets/farm.jpg";
+
+export interface Props {
+  autoPlayInterval?: number;
+}
+
+const { autoPlayInterval = 5000 } = Astro.props as Props;
+
+const slides = [
+  { id: 1, image: Img1, alt: "Background" },
+  { id: 2, image: Img2, alt: "Lettuce" },
+  { id: 4, image: Img4, alt: "Farm" },
+];
+---
+
+<div class="slideshow-container">
+  <div class="slides-wrapper">
+    {
+      slides.map((slide) => (
+        <div class="slide" data-slide-id={slide.id}>
+          <Image src={slide.image} alt={slide.alt} class="slide-image" />
+        </div>
+      ))
+    }
+  </div>
+
+  <!-- Navigation Buttons -->
+  <button class="prev-btn" aria-label="Previous slide">❮</button>
+  <button class="next-btn" aria-label="Next slide">❯</button>
+
+  <!-- Slide Indicators -->
+  <div class="indicators">
+    {
+      slides.map((_, index) => (
+        <button
+          class={`indicator ${index === 0 ? "active" : ""}`}
+          data-slide-index={index}
+          aria-label={`Go to slide ${index + 1}`}
+        />
+      ))
+    }
+  </div>
+
+  <!-- Play/Pause -->
+  <button class="play-btn">⏸</button>
+</div>
+
+<script define:vars={{ autoPlayInterval, totalSlides: slides.length }}>
+  let currentSlide = 0;
+  let autoPlayTimer;
+  let isPlaying = true;
+
+  const container = document.querySelector(".slideshow-container");
+  const wrapper = container.querySelector(".slides-wrapper");
+  const indicators = container.querySelectorAll(".indicator");
+
+  function updateUI() {
+    wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+    indicators.forEach((ind, i) =>
+      ind.classList.toggle("active", i === currentSlide),
+    );
+  }
+
+  function showSlide(index) {
+    if (index >= totalSlides) currentSlide = 0;
+    else if (index < 0) currentSlide = totalSlides - 1;
+    else currentSlide = index;
+    updateUI();
+  }
+
+  function nextSlide() {
+    showSlide(currentSlide + 1);
+  }
+  function prevSlide() {
+    showSlide(currentSlide - 1);
+  }
+
+  function startAutoPlay() {
+    if (!isPlaying) return;
+    autoPlayTimer = setInterval(nextSlide, autoPlayInterval);
+  }
+  function stopAutoPlay() {
+    clearInterval(autoPlayTimer);
+  }
+
+  function togglePlay(btn) {
+    isPlaying = !isPlaying;
+    btn.textContent = isPlaying ? "⏸" : "▶";
+    if (isPlaying) startAutoPlay();
+    else stopAutoPlay();
+  }
+
+  // Buttons
+  container.querySelector(".next-btn")?.addEventListener("click", () => {
+    nextSlide();
+    stopAutoPlay();
+  });
+  container.querySelector(".prev-btn")?.addEventListener("click", () => {
+    prevSlide();
+    stopAutoPlay();
+  });
+
+  container.querySelectorAll(".indicator").forEach((ind, i) =>
+    ind.addEventListener("click", () => {
+      showSlide(i);
+      stopAutoPlay();
+    }),
+  );
+
+  container.querySelector(".play-btn")?.addEventListener("click", function () {
+    togglePlay(this);
+  });
+
+  // Keyboard
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") nextSlide();
+    if (e.key === "ArrowLeft") prevSlide();
+  });
+
+  // Touch swipe
+  let startX = 0;
+  container.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  });
+  container.addEventListener("touchend", (e) => {
+    let endX = e.changedTouches[0].clientX;
+    if (startX - endX > 50) nextSlide();
+    if (endX - startX > 50) prevSlide();
+  });
+
+  // Hover
+  container.addEventListener("mouseenter", stopAutoPlay);
+  container.addEventListener("mouseleave", startAutoPlay);
+
+  // Initialize
+  updateUI();
+  startAutoPlay();
+</script>
+
+<style>
+  .slideshow-container {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  .slides-wrapper {
+    display: flex;
+    transition: transform 0.6s ease-in-out;
+  }
+  .slide {
+    min-width: 100%;
+    flex: 0 0 100%;
+  }
+  .slide-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+  }
+  .prev-btn,
+  .next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 24px;
+    padding: 15px 18px;
+    cursor: pointer;
+    border-radius: 5px;
+    z-index: 10;
+  }
+  .prev-btn:hover,
+  .next-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  .prev-btn {
+    left: 15px;
+  }
+  .next-btn {
+    right: 15px;
+  }
+  .indicators {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+  }
+  .indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    transition:
+      background 0.3s,
+      transform 0.3s;
+  }
+  .indicator.active {
+    background: rgba(255, 255, 255, 1);
+    transform: scale(1.3);
+  }
+  .indicator:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: scale(1.2);
+  }
+  .play-btn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  @media (max-width: 768px) {
+    .slide-image {
+      height: 250px;
+    }
+    .prev-btn,
+    .next-btn {
+      font-size: 18px;
+      padding: 10px 12px;
+    }
+    .indicator {
+      width: 10px;
+      height: 10px;
+    }
+  }
+</style>

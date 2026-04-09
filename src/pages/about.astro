@@ -1,0 +1,234 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Showcase from "../components/Showcase.astro";
+import Main from "../components/Main.astro";
+import CEO from "../assets/ceo.jpg"; // add your image
+import Slideshow from "../components/Ourfarmslide.astro";
+---
+
+<!-- ---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+  <section class="page-content">
+    <div class="container">
+      <h2>About Us</h2>
+      <p>
+        At IB Veggies, we are passionate about providing the freshest and
+        highest quality spring onions and lettuce to our customers. With a
+        commitment to excellence, we source our produce directly from local
+        farms, ensuring that every leaf and stalk meets our rigorous standards.
+        Our mission is to be the trusted supplier of choice for restaurants,
+        vendors, and individuals in Anloga and Accra, delivering not only
+        exceptional vegetables but also reliable service that supports the
+        growth of your business.
+      </p>
+    </div>
+  </section>
+</Layout> -->
+<Layout title="About Us">
+  <Showcase
+    heading="WELCOME"
+    text="Your One Stop Farm Reliable Supplier of Fresh Spring Onions & Lettuce"
+    showExtra={false}
+  />
+  <Main>
+    <!-- 🔥 HERO SECTION -->
+
+    <!-- 🌿 MISSION / VISION / MOTTO -->
+    <section class="values">
+      <div class="container">
+        <div class="card">
+          <h3>🌱 Our Mission</h3>
+          <p>
+            To provide fresh, high-quality vegetables to homes and businesses
+            with reliability and consistency.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>👁 Our Vision</h3>
+          <p>
+            To become a leading and trusted vegetable supplier across Ghana.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>⭐ Our Motto</h3>
+          <p>“Freshness you can trust, quality you deserve.”</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 👤 CEO PROFILE -->
+    <section class="ceo">
+      <div class="container ceo-grid">
+        <img src={CEO.src} alt="CEO of IB Veggies" />
+
+        <div class="page-content">
+          <h2>Meet Our CEO</h2>
+          <h3 class="ceo-name">Eric Amekortu</h3>
+          <p class="ceo-role">Founder & Chief Executive Officer, IB Veggies</p>
+
+          <p>
+            Eric Amekortu is the visionary behind IB Veggies, driven by a deep
+            passion for agriculture, innovation, and community development. With
+            a strong background in Mathematics and Information Technology, he
+            brings a unique blend of analytical thinking and creativity into the
+            agricultural space.
+          </p>
+
+          <p>
+            His leadership focuses on delivering high-quality, fresh produce
+            while building reliable systems that connect farms directly to
+            customers. Through dedication and consistency, he has positioned IB
+            Veggies as a trusted supplier in Accra and beyond.
+          </p>
+
+          <p>
+            Beyond business, Eric is committed to empowering communities,
+            supporting local farmers, and promoting sustainable agricultural
+            practices for the future.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🛒 OUR SERVICES -->
+    <section class="services">
+      <h2>What We Offer</h2>
+
+      <div class="container">
+        <div class="service-card">
+          <h3>🥬 Fresh Lettuce Supply</h3>
+          <p>High-quality lettuce delivered fresh to your doorstep.</p>
+        </div>
+
+        <div class="service-card">
+          <h3>🌿 Spring Onions</h3>
+          <p>Clean, fresh, and ready for your kitchen or business.</p>
+        </div>
+
+        <div class="service-card">
+          <h3>🚚 Bulk Delivery</h3>
+          <p>Reliable supply for restaurants, vendors, and markets.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 📖 OUR STORY -->
+    <section class="story">
+      <div class="container story-grid">
+        <div class="page-content">
+          <h2>Our Story</h2>
+          <p>
+            IB Veggies started with a simple goal — to deliver fresh vegetables
+            directly from farms to customers. What began as a small initiative
+            has grown into a trusted supply business serving Accra and beyond.
+          </p>
+
+          <p>
+            Through dedication, quality control, and strong relationships with
+            farmers, we continue to grow and serve our community better every
+            day.
+          </p>
+        </div>
+        <Slideshow autoPlayInterval={4000} />
+      </div>
+    </section>
+  </Main>
+</Layout>
+
+<style>
+  /* HERO */
+  .hero {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 48px;
+  }
+
+  .hero p {
+    font-size: 20px;
+  }
+
+  /* VALUES */
+  .values .container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 0px 0px;
+  }
+
+  .card {
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  /* CEO */
+  .ceo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    padding: 40px 20px;
+  }
+
+  .ceo img {
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  /* SERVICES */
+  .services {
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .services .container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .service-card {
+    background: #f1f5f9;
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  /* STORY */
+  .story-grid {
+    /* display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px; */
+  }
+
+  .story img {
+    width: 100%;
+    /* border-radius: 10px; */
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .values .container,
+    .services .container,
+    .ceo-grid,
+    .story-grid {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 32px;
+    }
+  }
+</style>

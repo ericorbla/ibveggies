@@ -1,0 +1,61 @@
+---
+import { Image } from "astro:assets";
+import springOnionsImg from "../assets/spring-onions.jpeg";
+import lettuceImg from "../assets/lettuce.jpeg";
+import mixedGreensImg from "../assets/mixed-greens.jpeg";
+import Card from "./Card.astro";
+
+const vegetablesData = [
+  {
+    name: "Spring Onions",
+    price: 199.0,
+    description: "Fresh, crisp spring onions perfect for salads and cooking",
+    image: springOnionsImg,
+  },
+  {
+    name: "Lettuce",
+    price: 399.0,
+    description: "Organic lettuce varieties for healthy meals",
+    image: lettuceImg,
+  },
+  {
+    name: "Mixed Greens",
+    price: 259.0,
+    description: "Premium blend of fresh mixed vegetables",
+    image: mixedGreensImg,
+  },
+];
+---
+
+<section class="features">
+  <div class="container">
+    {
+      vegetablesData.map((vegetable) => (
+        <Card
+          dark={false}
+          image={vegetable.image}
+          name={vegetable.name}
+          price={vegetable.price}
+          description={vegetable.description}
+        />
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  /* Cards */
+  .features .container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    padding: 0 20px;
+    margin: 30px auto;
+  }
+
+  @media (max-width: 500px) {
+    .features .container {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

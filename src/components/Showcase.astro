@@ -1,0 +1,81 @@
+---
+import Background from "../assets/background.jpeg";
+import SocialMedia from "./SocialMedia.astro";
+import Image  from "../images/iblogo.png";
+import Farm from "../assets/farm.jpg"; // optional
+
+
+export interface Props {
+  heading?: string;
+  text?: string;
+  showExtra?: boolean;
+}
+const { heading = "VEGGIES", text = "Your Reliable Supplier of Fresh Spring Onions & Lettuce", showExtra = false } =
+  Astro.props as Props;
+---
+
+<section class="showcase">
+  <div class="showcase-text">
+    <img src={Image.src} alt="">
+    <h1>{heading}</h1>
+    <p>
+      {text}
+    </p>
+  </div>
+
+  {showExtra && (
+    <SocialMedia className="showcase-social" />
+  <p class="showcase-demo">
+    <small>Join us for more update</small>
+  </p>
+  )}
+
+</section>
+
+<style define:vars={{Farm}}>
+  /* Showcase */
+  .showcase {
+    height: auto;
+    background-color: var(--color-primary);
+    background-image: linear-gradient(
+  to bottom,
+  var(--color-primary),
+  rgba(15, 23, 42, 0)
+), url("../assets/farm.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 30px;
+  }
+
+  .showcase-blog {
+    min-height: 300px;
+  }
+
+  .showcase-text {
+    max-width: 500px;
+    color: #fff;
+    text-align: center;
+    margin: 50px auto;
+  }
+  .showcase-text img {
+    height: 120px;
+  }
+
+  .showcase h1 {
+    font-size: 50px;
+    color: #eafbe9;
+    margin-bottom: 20px;
+  }
+
+  .showcase p {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .showcase-demo {
+    color: #fff;
+    text-align: center;
+    font-weight: 300;
+  }
+</style>

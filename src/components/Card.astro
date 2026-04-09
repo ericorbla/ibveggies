@@ -1,0 +1,70 @@
+---
+import { Image } from "astro:assets";
+
+export interface Props {
+  name: string;
+  price: string | number;
+  image?: any;
+  description?: string;
+  dark?: boolean;
+}
+
+const { name, price, image, description, dark = false } = Astro.props as Props;
+---
+
+<div class={`card ${dark && "dark"}`}>
+  {image && <Image src={image} alt={name} class="card-image" />}
+  <h3>{name}</h3>
+  {description && <p class="description">{description}</p>}
+  <p class="price">GH₵ {price} Per Sack</p>
+</div>
+
+<style>
+  .card {
+    background: #fff;
+    /* padding: 20px; */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+
+  .card h3 {
+    margin: 10px 0;
+    font-size: 1.3em;
+  }
+
+  .description {
+    font-size: 0.9em;
+    color: #666;
+    margin: 10px 0;
+  }
+
+  .price {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #27ae60;
+    margin: 15px 0 0 0;
+  }
+
+  .dark {
+    background: var(--color-primary);
+    color: #fff;
+  }
+
+  .dark .price {
+    color: #58d68d;
+  }
+
+  .dark .description {
+    color: #ccc;
+  }
+</style>

@@ -1,11 +1,68 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import Showcase from "../components/Showcase.astro";
+import Features from "../components/Features.astro";
+import Slideshow from "../components/Slideshow.astro";
+import Testimonial from "../components/Testimonial.astro";
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Home">
+  <Showcase showExtra={true} />
+  <Features />
+
+  <Slideshow autoPlayInterval={3000} />
+  <section class="page-content">
+    <div class="container">
+      <!-- <h2>Supplying Excellence in Every Harvest</h2> -->
+      <h2>Reliable Supply for Restaurants & Vendors</h2>
+      <p>
+        We provide steady, high-quality spring onions and lettuce to help your
+        business grow without interruptions.
+      </p>
+      <!-- <p>
+        We specialize in delivering premium spring onions and lettuce with
+        unmatched quality and reliability.
+      </p> -->
+
+      <h3>Start Patronising Us</h3>
+      <p>
+        We're your trusted veggie(SPRING ONIONS AND LETTUCES) suppliers in
+        Anloga and Accra, providing fresh produce to customers across the city.
+        From farm to table, we ensure quality and reliability. Get the best
+        veggies for your business with us!.
+      </p>
+    </div>
+    <Testimonial
+      title="What Our Customers Say"
+      testimonials={[
+        {
+          profileImage: "../images/amamensah.jpeg",
+          name: "Ama Mensah",
+          role: "Restaurant Owner, Accra",
+          testimonial:
+            "The freshness of their spring onions and lettuces is unmatched. My customers notice the difference every time!",
+          rating: 5,
+        },
+        {
+          profileImage: "../images/kwameasare.jpeg",
+          name: "Kwame Asare",
+          role: "Food Vendor, Anloga",
+          testimonial:
+            "Reliable delivery and top-quality produce. I never have to worry about stock because they always come through.",
+          rating: 4,
+        },
+        {
+          profileImage: "../images/efuaboateng.jpeg",
+          name: "Efua Boateng",
+          role: "Catering Service Owner",
+          testimonial:
+            "From farm to table indeed! Their vegetables are always fresh, clean, and perfect for my catering business.",
+          rating: 5,
+        },
+      ]}
+    />
+  </section>
 </Layout>
