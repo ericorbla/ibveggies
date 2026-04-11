@@ -38,7 +38,7 @@ import Image from "../images/iblogo.png";
           width="20"
           height="20"
           fill="currentColor"
-          color="#a00202"
+          color=""
         >
           <path
             d="M320 48C337.7 48 352 62.3 352 80L352 98.3C450.1 112.3 527.7 189.9 541.7 288L560 288C577.7 288 592 302.3 592 320C592 337.7 577.7 352 560 352L541.7 352C527.7 450.1 450.1 527.7 352 541.7L352 560C352 577.7 337.7 592 320 592C302.3 592 288 577.7 288 560L288 541.7C189.9 527.7 112.3 450.1 98.3 352L80 352C62.3 352 48 337.7 48 320C48 302.3 62.3 288 80 288L98.3 288C112.3 189.9 189.9 112.3 288 98.3L288 80C288 62.3 302.3 48 320 48zM160 320C160 408.4 231.6 480 320 480C408.4 480 480 408.4 480 320C480 231.6 408.4 160 320 160C231.6 160 160 231.6 160 320zM320 224C373 224 416 267 416 320C416 373 373 416 320 416C267 416 224 373 224 320C224 267 267 224 320 224z"
@@ -54,128 +54,137 @@ import Image from "../images/iblogo.png";
     <div class="footer-section">
       <h3>Stay Updated</h3>
       <p>Get updates on fresh produce and availability.</p>
-      <form onsubmit="event.preventDefault()">
-        <input type="email" placeholder="Enter your email" required />
+
+      <form name="subscribe" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="subscribe" />
+
+        <input
+          type="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+        />
+
         <button type="submit">Subscribe</button>
       </form>
     </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom">
+      <p>© {year} IB VEGGIES. All rights reserved.</p>
+    </div>
   </div>
 
-  <!-- Bottom Bar -->
-  <div class="footer-bottom">
-    <p>© {year} IB VEGGIES. All rights reserved.</p>
-  </div>
-</footer>
-
-<style>
-  .footer {
-    background: var(--color-primary, #1f2937);
-    color: #fbe9f7;
-    padding-top: 40px;
-  }
-  .footer img {
-    height: 50px;
-    vertical-align: middle;
-  }
-
-  .footer .container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
-    max-width: 1100px;
-    margin: auto;
-    padding: 0 20px;
-  }
-
-  .footer-section h2,
-  .footer-section h3 {
-    margin-bottom: 15px;
-    vertical-align: middle;
-  }
-
-  .footer-section p {
-    font-size: 14px;
-    line-height: 1.6;
-    color: #ccc;
-  }
-
-  .footer-section ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  .footer-section ul li {
-    margin-bottom: 10px;
-  }
-
-  .footer-section ul li a {
-    color: #ccc;
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-
-  .footer-section ul li a:hover {
-    color: #22c55e;
-  }
-
-  /* Form */
-  .footer-section form {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-  }
-
-  .footer-section input {
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    width: 100%;
-    outline: none;
-  }
-
-  .footer-section button {
-    padding: 10px 14px;
-    background: #22c55e;
-    border: none;
-    color: white;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background 0.3s;
-  }
-
-  .footer-section button:hover {
-    background: #16a34a;
-  }
-
-  /* Bottom */
-  .footer-bottom {
-    text-align: center;
-    padding: 20px;
-    margin-top: 30px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 14px;
-    color: #aaa;
-  }
-
-  /* ✅ Responsive */
-  @media (max-width: 900px) {
-    .footer .container {
-      grid-template-columns: repeat(2, 1fr);
+  <style>
+    .footer {
+      background: var(--color-primary, #1f2937);
+      color: #fbe9f7;
+      padding-top: 40px;
     }
-  }
-
-  @media (max-width: 600px) {
-    .footer .container {
-      grid-template-columns: 1fr;
-      text-align: center;
+    .footer img {
+      height: 50px;
+      vertical-align: middle;
     }
 
+    .footer .container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      max-width: 1100px;
+      margin: auto;
+      padding: 0 20px;
+    }
+
+    .footer-section h2,
+    .footer-section h3 {
+      margin-bottom: 15px;
+      vertical-align: middle;
+    }
+
+    .footer-section p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #ccc;
+    }
+
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-section ul li a {
+      color: #ccc;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-section ul li a:hover {
+      color: #22c55e;
+    }
+
+    /* Form */
     .footer-section form {
-      flex-direction: column;
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .footer-section input {
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      width: 100%;
+      outline: none;
     }
 
     .footer-section button {
-      width: 100%;
+      padding: 10px 14px;
+      background: #22c55e;
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.3s;
     }
-  }
-</style>
+
+    .footer-section button:hover {
+      background: #16a34a;
+    }
+
+    /* Bottom */
+    .footer-bottom {
+      text-align: center;
+      padding: 20px;
+      margin-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    /* ✅ Responsive */
+    @media (max-width: 900px) {
+      .footer .container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .footer .container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .footer-section form {
+        flex-direction: column;
+      }
+
+      .footer-section button {
+        width: 100%;
+      }
+    }
+  </style>
+</footer>
