@@ -132,6 +132,9 @@ h3 {
         color: var(--color-accent, #1f2937);
 
   }
+  html {
+  scroll-behavior: smooth;
+}
 
 @media (max-width: 960px) {
   .logos-small {

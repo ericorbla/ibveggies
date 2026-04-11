@@ -1,0 +1,129 @@
+---
+import { getCollection } from "astro:content";
+
+// Fetch updates
+const updates = await getCollection("updates");
+console.log(await getCollection("updates"));
+// Get latest safely
+const latest = updates
+  .filter((u) => u.data.date)
+  .sort(
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+  )[0];
+
+// Render content safely
+let Content;
+if (latest) {
+  ({ Content } = await latest.render());
+}
+
+// Dev-only log
+if (import.meta.env.DEV) {
+  console.log(updates);
+}
+---
+
+{
+  latest ? (
+    <section id="updates" class="updates">
+      <h2>{latest.data.title}</h2>
+
+      <div class="share-buttons">
+        <button id="copy-link">Copy Link</button>
+        <button id="share-link">Share</button>
+      </div>
+
+      <div class="update-content">
+        <Content />
+      </div>
+    </section>
+  ) : (
+    // <p>No updates available</p>
+    <p />
+  )
+}
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const sectionLink =
+      window.location.origin + window.location.pathname + "#updates";
+
+    const copyBtn = document.getElementById("copy-link");
+    const shareBtn = document.getElementById("share-link");
+
+    // Copy link
+    copyBtn?.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(sectionLink);
+        copyBtn.textContent = "Copied!";
+        setTimeout(() => {
+          copyBtn.textContent = "Copy Link";
+        }, 2000);
+      } catch (err) {
+        alert("Failed to copy link");
+      }
+    });
+
+    // Share link
+    shareBtn?.addEventListener("click", async () => {
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: "IB Veggies Availability",
+            text: "Check today's fresh veggies availability 🌱",
+            url: sectionLink,
+          });
+        } catch (err) {
+          console.log("Share cancelled or failed");
+        }
+      } else {
+        alert("Sharing not supported on this device");
+      }
+    });
+  });
+</script>
+
+<style>
+  .updates {
+    padding: 50px 20px;
+    background: #f9f9f9;
+  }
+
+  .updates h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .update-content {
+    max-width: 700px;
+    margin: auto;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  .update-content h2 {
+    font-size: 20px;
+    margin-top: 20px;
+  }
+
+  .share-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .share-buttons button {
+    padding: 10px 15px;
+    border: none;
+    background: var(--color-primary);
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .share-buttons button:hover {
+    background: #0f3d3d;
+  }
+</style>

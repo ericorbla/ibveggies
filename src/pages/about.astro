@@ -6,31 +6,11 @@ import CEO from "../assets/ceo.jpg"; // add your image
 import Slideshow from "../components/Ourfarmslide.astro";
 ---
 
-<!-- ---
-import Layout from "../layouts/Layout.astro";
----
-
-<Layout>
-  <section class="page-content">
-    <div class="container">
-      <h2>About Us</h2>
-      <p>
-        At IB Veggies, we are passionate about providing the freshest and
-        highest quality spring onions and lettuce to our customers. With a
-        commitment to excellence, we source our produce directly from local
-        farms, ensuring that every leaf and stalk meets our rigorous standards.
-        Our mission is to be the trusted supplier of choice for restaurants,
-        vendors, and individuals in Anloga and Accra, delivering not only
-        exceptional vegetables but also reliable service that supports the
-        growth of your business.
-      </p>
-    </div>
-  </section>
-</Layout> -->
 <Layout title="About Us">
   <Showcase
-    heading="WELCOME"
-    text="Your One Stop Farm Reliable Supplier of Fresh Spring Onions & Lettuce"
+    heading="VEGGIES"
+    subheading="WELCOME"
+    text="To your One Stop Farm For Reliable Supplier of Fresh Spring Onions & Lettuce"
     showExtra={false}
   />
   <Main>
@@ -40,7 +20,21 @@ import Layout from "../layouts/Layout.astro";
     <section class="values">
       <div class="container">
         <div class="card">
-          <h3>🌱 Our Mission</h3>
+          <h3>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 640 640"
+              width="20"
+              height="20"
+              fill="currentColor"
+              color="#4ade80"
+            >
+              <path
+                d="M420.9 448C428.2 425.7 442.8 405.5 459.3 388.1C492 353.7 512 307.2 512 256C512 150 426 64 320 64C214 64 128 150 128 256C128 307.2 148 353.7 180.7 388.1C197.2 405.5 211.9 425.7 219.1 448L420.8 448zM416 496L224 496L224 512C224 556.2 259.8 592 304 592L336 592C380.2 592 416 556.2 416 512L416 496zM312 176C272.2 176 240 208.2 240 248C240 261.3 229.3 272 216 272C202.7 272 192 261.3 192 248C192 181.7 245.7 128 312 128C325.3 128 336 138.7 336 152C336 165.3 325.3 176 312 176z"
+              ></path>
+            </svg>
+            Our Mission
+          </h3>
           <p>
             To provide fresh, high-quality vegetables to homes and businesses
             with reliability and consistency.
@@ -48,14 +42,42 @@ import Layout from "../layouts/Layout.astro";
         </div>
 
         <div class="card">
-          <h3>👁 Our Vision</h3>
+          <h3>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 640 640"
+              width="20"
+              height="20"
+              fill="currentColor"
+              color="black"
+            >
+              <path
+                d="M320 96C239.2 96 174.5 132.8 127.4 176.6C80.6 220.1 49.3 272 34.4 307.7C31.1 315.6 31.1 324.4 34.4 332.3C49.3 368 80.6 420 127.4 463.4C174.5 507.1 239.2 544 320 544C400.8 544 465.5 507.2 512.6 463.4C559.4 419.9 590.7 368 605.6 332.3C608.9 324.4 608.9 315.6 605.6 307.7C590.7 272 559.4 220 512.6 176.6C465.5 132.9 400.8 96 320 96zM176 320C176 240.5 240.5 176 320 176C399.5 176 464 240.5 464 320C464 399.5 399.5 464 320 464C240.5 464 176 399.5 176 320zM320 256C320 291.3 291.3 320 256 320C244.5 320 233.7 317 224.3 311.6C223.3 322.5 224.2 333.7 227.2 344.8C240.9 396 293.6 426.4 344.8 412.7C396 399 426.4 346.3 412.7 295.1C400.5 249.4 357.2 220.3 311.6 224.3C316.9 233.6 320 244.4 320 256z"
+              ></path>
+            </svg>
+            Our Vision
+          </h3>
           <p>
             To become a leading and trusted vegetable supplier across Ghana.
           </p>
         </div>
 
         <div class="card">
-          <h3>⭐ Our Motto</h3>
+          <h3>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 640 640"
+              width="20"
+              height="20"
+              fill="currentColor"
+              color="red"
+            >
+              <path
+                d="M341.5 45.1C337.4 37.1 329.1 32 320.1 32C311.1 32 302.8 37.1 298.7 45.1L225.1 189.3L65.2 214.7C56.3 216.1 48.9 222.4 46.1 231C43.3 239.6 45.6 249 51.9 255.4L166.3 369.9L141.1 529.8C139.7 538.7 143.4 547.7 150.7 553C158 558.3 167.6 559.1 175.7 555L320.1 481.6L464.4 555C472.4 559.1 482.1 558.3 489.4 553C496.7 547.7 500.4 538.8 499 529.8L473.7 369.9L588.1 255.4C594.5 249 596.7 239.6 593.9 231C591.1 222.4 583.8 216.1 574.8 214.7L415 189.3L341.5 45.1z"
+              ></path>
+            </svg>
+            Our Motto
+          </h3>
           <p>“Freshness you can trust, quality you deserve.”</p>
         </div>
       </div>
