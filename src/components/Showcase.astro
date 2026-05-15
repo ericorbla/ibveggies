@@ -1,7 +1,8 @@
 ---
 import Background from "../assets/background.jpeg";
+import { Image } from "astro:assets";
 import SocialMedia from "./SocialMedia.astro";
-import Image  from "../images/iblogo.png";
+import Logo  from "../images/iblogo.png";
 import Farm from "../assets/farm.jpg"; // optional
 
 
@@ -17,7 +18,9 @@ const { heading = "VEGGIES", subheading = "", text = "Your Reliable Supplier of 
 
 <section class="showcase">
   <div class="showcase-text">
-    <img src={Image.src} alt="">
+    <!-- <img src={Logo.src} alt=""> -->
+    <Image src={Logo} alt="logo" class="img" />
+
     <h1>{heading}</h1>
     {subheading && <h2 class="subheading">{subheading}</h2>}
     <p>
@@ -60,8 +63,9 @@ const { heading = "VEGGIES", subheading = "", text = "Your Reliable Supplier of 
     text-align: center;
     margin: 50px auto;
   }
-  .showcase-text img {
+  .showcase-text .img {
     height: 120px;
+    width: 120px;
   }
 
   .showcase h1 {
@@ -79,10 +83,11 @@ const { heading = "VEGGIES", subheading = "", text = "Your Reliable Supplier of 
     color: #fff;
     text-align: center;
     font-weight: 300;
+    margin-top: 30px;
   }
   .subheading {
     font-size: 30px;
-    color: #e8784f;
+    color: #fdc829;
     margin-bottom: 15px;
   }
 </style>

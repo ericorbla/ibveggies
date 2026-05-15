@@ -1,14 +1,15 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Features from "../components/Features.astro";
+import Updates from "../components/Updates.astro";
 import Slideshow from "../components/Slideshow.astro";
 import Testimonial from "../components/Testimonial.astro";
 ---
 
 <Layout>
   <Slideshow autoPlayInterval={3000} />
-
-  <section class="page-content">
+  <Updates />
+    <section class="page-content">
     <div class="container">
       <h2>Our Services</h2>
       <p>
@@ -52,6 +53,4 @@ import Testimonial from "../components/Testimonial.astro";
     ]}
   />
 </Layout>
-<style>
 
-</style>

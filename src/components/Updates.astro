@@ -1,32 +1,36 @@
 ---
-import { getCollection } from "astro:content";
+const updates = [
+  {
+    title: "Fresh Vegetables Available Today",
+    date: "2026-04-11",
+    content: `
+      We have fresh, lettuce, and spring onions available today.
+      Order early before stock runs out!
+    `,
+  },
+  {
+    title: "New Stock Coming Tomorrow",
+    date: "2026-04-10",
+    content: `
+      Expect new arrivals of peppers and cucumbers tomorrow morning.
+    `,
+  },
+];
 
-// Fetch updates
-const updates = await getCollection("updates");
-console.log(await getCollection("updates"));
-// Get latest safely
+// Get latest
 const latest = updates
-  .filter((u) => u.data.date)
-  .sort(
-    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
-  )[0];
-
-// Render content safely
-let Content;
-if (latest) {
-  ({ Content } = await latest.render());
-}
-
-// Dev-only log
-if (import.meta.env.DEV) {
-  console.log(updates);
-}
+  .filter((u) => u.date)
+  .sort((a, b) => {
+    const dateA = new Date(a.date).getTime();
+    const dateB = new Date(b.date).getTime();
+    return dateB - dateA;
+  })[0];
 ---
 
 {
   latest ? (
     <section id="updates" class="updates">
-      <h2>{latest.data.title}</h2>
+      <h2>{latest.title}</h2>
 
       <div class="share-buttons">
         <button id="copy-link">Copy Link</button>
@@ -34,19 +38,17 @@ if (import.meta.env.DEV) {
       </div>
 
       <div class="update-content">
-        <Content />
+        <p>{latest.content}</p>
       </div>
     </section>
   ) : (
-    // <p>No updates available</p>
     <p />
   )
 }
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const sectionLink =
-      window.location.origin + window.location.pathname + "#updates";
+    const sectionLink = window.location.origin + window.location.pathname;
 
     const copyBtn = document.getElementById("copy-link");
     const shareBtn = document.getElementById("share-link");
@@ -99,6 +101,9 @@ if (import.meta.env.DEV) {
     margin: auto;
     font-size: 18px;
     line-height: 1.6;
+  }
+  p {
+    text-align: center;
   }
 
   .update-content h2 {
